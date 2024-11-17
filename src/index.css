@@ -10,7 +10,7 @@ header {
   padding: 1rem;
   display: flex;
   justify-content: space-between; /* 両端に要素を配置 */
-  justify-content: flex-end; /* 右寄せ */
+  align-items: center; /* 垂直方向に中央寄せ */
 }
 
 /* ヘッダー内のタイトル部分 */
