@@ -5,21 +5,28 @@
 
 /* ヘッダーのスタイル */
 header {
-  background-color: #333;
+  background-color: #000080;
   color: white;
   padding: 1rem;
-  text-align: center;
+  display: flex;
+  align-items: center; /* 垂直方向に中央寄せ */
+  justify-content: flex-end; /* 左寄せ */
+}
+
+/* ヘッダー内のタイトル部分 */
+header h1 {
+  margin-left: 20px; /* タイトルとナビゲーションメニューの間にスペース */
 }
 
 /* ナビゲーションメニューのスタイル */
 header nav {
-  margin-top: 10px;
+  display: flex; /* ナビゲーションリンクを横並びに */
 }
 
 header nav a {
   color: white;
   text-decoration: none;
-  margin: 0 15px;
+  margin: 0 15px; /* 各リンクの間にスペース */
 }
 
 header nav a:hover {
