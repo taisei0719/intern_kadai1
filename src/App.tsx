@@ -9,13 +9,15 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <div className="App">
-        <nav>
-          <Link to="/">ホーム</Link>
-          <br />
-          <Link to="/results">検索結果</Link>
-          <br />
-          <Link to="/contact">お問い合わせ</Link>
-        </nav>
+        <header>
+          <nav>
+            <Link to="/">ホーム</Link>
+            <br />
+            <Link to="/results">検索結果</Link>
+            <br />
+            <Link to="/contact">お問い合わせ</Link>
+          </nav>
+        </header>
 
         <Routes>
           <Route path="/" element={<Home />} />
