@@ -17,7 +17,7 @@ header {
 header h1 {
   display: flex;
   align-items: center; /* 垂直方向に中央寄せ */
-  justify-content: flex-end; /* 左寄せ */
+  justify-content: flex-start; /* 左寄せ */
 }
 
 /* ナビゲーションメニューのスタイル */
