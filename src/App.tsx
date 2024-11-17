@@ -12,7 +12,7 @@ const App: React.FC = () => {
         <header>
           <h1>求人検索サイト</h1>
           <nav>
-            <Link to="/">ホーム</Link>
+            <Link to="/">HOME</Link>
             <br />
             <Link to="/results">検索結果</Link>
             <br />

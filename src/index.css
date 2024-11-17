@@ -15,7 +15,9 @@ header {
 
 /* ヘッダー内のタイトル部分 */
 header h1 {
-  margin-left: 20px; /* タイトルとナビゲーションメニューの間にスペース */
+  display: flex;
+  align-items: center; /* 垂直方向に中央寄せ */
+  justify-content: flex-end; /* 左寄せ */
 }
 
 /* ナビゲーションメニューのスタイル */

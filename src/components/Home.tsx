@@ -11,7 +11,6 @@ export const Home: React.FC = () => {
 
   return (
     <div>
-      <h1>求人検索サイト</h1>
       <input
         type="text"
         placeholder="職種や勤務地を入力"
