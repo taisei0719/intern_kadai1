@@ -9,15 +9,13 @@ header {
   color: white;
   padding: 1rem;
   display: flex;
-  align-items: center; /* 垂直方向に中央寄せ */
-  justify-content: flex-end; /* 左寄せ */
+  justify-content: space-between; /* 両端に要素を配置 */
+  justify-content: flex-end; /* 右寄せ */
 }
 
 /* ヘッダー内のタイトル部分 */
 header h1 {
-  display: flex;
-  align-items: center; /* 垂直方向に中央寄せ */
-  justify-content: flex-start; /* 左寄せ */
+  margin: 0; /* タイトル周りの余白を削除 */
 }
 
 /* ナビゲーションメニューのスタイル */
