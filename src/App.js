@@ -2,10 +2,10 @@ import "./App.css"
 
 import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
 
-import { Home } from "./components/Home";
-import { Page1 } from "./components/Page1";
-import { Page2 } from "./components/Page2";
-import { Page3 } from "./components/Page3";
+import { Home } from "./pages/Home";
+import { Page1 } from "./pages/Page1";
+import { Page2 } from "./pages/Page2";
+import { Page3 } from "./pages/Page3";
 
 function App() {
   return (
