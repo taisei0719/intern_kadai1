@@ -35,6 +35,7 @@ export const Home: React.FC = () => {
       {/* 求人一覧 */}
       <div className="job-list-section">
         <h2>求人一覧</h2>
+        <p>該当件数: {filteredJobs.length}件</p>
         {filteredJobs.length > 0 ? (
           <ul className="job-list">
             {jobList.map((job) => (
