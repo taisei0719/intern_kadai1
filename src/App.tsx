@@ -10,7 +10,7 @@ const App: React.FC = () => {
     <BrowserRouter>
       <div className="App">
         <header>
-          <h1>求人検索サイト</h1>
+          <h1>求人検索アプリ</h1>
           <nav>
             <Link to="/">HOME</Link>
             <br />
