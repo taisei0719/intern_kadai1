@@ -45,6 +45,11 @@
   .job-list-section {
     width: 70%; /* 全体の70%を占める */
   }
+
+  .job-list-section h2 {
+    font-size: 20px;
+    font-weight: bold;
+  }
   
   .job-list {
     list-style-type: none;
