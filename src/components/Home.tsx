@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Home.css"; // CSSファイルをリンク
 
 const jobList = [
   { id: 1, title: "フロントエンドエンジニア", location: "東京", description: "Reactを使用した開発" },
@@ -16,27 +17,33 @@ export const Home: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>求人検索</h2>
-      <input
-        type="text"
-        placeholder="職種や勤務地を入力"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <button onClick={handleSearch}>検索</button>
+    <div className="home-container">
+      {/* 検索セクション */}
+      <div className="search-section">
+        <h2>求人検索</h2>
+        <input
+          type="text"
+          placeholder="職種や勤務地を入力"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button onClick={handleSearch}>検索</button>
+      </div>
 
-      <h2>求人一覧</h2>
-      <ul>
-        {jobList.map((job) => (
-          <li key={job.id} style={{ marginBottom: "1rem" }}>
-            <h3>{job.title}</h3>
-            <p>勤務地: {job.location}</p>
-            <p>{job.description}</p>
-            <button onClick={() => navigate('/detail/${job.id}')}>詳細を見る</button>
-          </li>
-        ))}
-      </ul>
+      {/* 求人一覧 */}
+      <div className="job-list-section">
+        <h2>求人一覧</h2>
+        <ul className="job-list">
+          {jobList.map((job) => (
+            <li key={job.id} className="job-item">
+              <h3>{job.title}</h3>
+              <p>勤務地: {job.location}</p>
+              <p>{job.description}</p>
+              <button onClick={() => navigate(`/detail/${job.id}`)}>詳細を見る</button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
