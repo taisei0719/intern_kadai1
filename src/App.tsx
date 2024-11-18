@@ -1,9 +1,8 @@
 import React from "react";
 import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
 import { Home } from "./components/Home";
-import { SearchResults } from "./components/SearchResults";
 import { JobDetail } from "./components/JobDetail";
-import { Contact } from "./components/Contact";
+import { JobPost } from "./components/JobPost";
 
 const App: React.FC = () => {
   return (
@@ -12,19 +11,16 @@ const App: React.FC = () => {
         <header>
           <h1>求人検索アプリ</h1>
           <nav>
-            <Link to="/">HOME</Link>
+            <Link to="/">求人検索</Link>
             <br />
-            <Link to="/results">検索結果</Link>
-            <br />
-            <Link to="/contact">お問い合わせ</Link>
+            <Link to="/post">求人投稿</Link>
           </nav>
         </header>
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/results" element={<SearchResults />} />
           <Route path="/detail/:id" element={<JobDetail />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/post" element={<JobPost />} />
         </Routes>
       </div>
     </BrowserRouter>
