@@ -16,7 +16,8 @@ header {
 /* ヘッダー内のタイトル部分 */
 header h1 {
   margin: 0; /* タイトル周りの余白を削除 */
-  font-size: 20px
+  font-size: 23px;
+  font-weight: bold;
 }
 
 /* ナビゲーションメニューのスタイル */
