@@ -10,10 +10,17 @@ const jobList = [
 
 export const Home: React.FC = () => {
   const [query, setQuery] = useState<string>("");
+  const [filteredJobs, setFilteredJobs] = useState(jobList);
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    navigate(`/results?query=${query}`);
+    const lowerCaseQuery = query.toLowerCase();
+    const results = jobList.filter(
+      (job) =>
+        job.title.toLowerCase().includes(lowerCaseQuery) ||
+        job.category.toLowerCase().includes(lowerCaseQuery)
+    );
+    setFilteredJobs(results);
   };
 
   return (
@@ -33,16 +40,20 @@ export const Home: React.FC = () => {
       {/* 求人一覧 */}
       <div className="job-list-section">
         <h2>求人一覧</h2>
-        <ul className="job-list">
-          {jobList.map((job) => (
-            <li key={job.id} className="job-item">
-              <h3>{job.title}</h3>
-              <p>カテゴリ: {job.category}</p>
-              <p>年収: {job.income}万円</p>
-              <button onClick={() => navigate(`/detail/${job.id}`)}>詳細を見る</button>
-            </li>
-          ))}
-        </ul>
+        {filteredJobs.length > 0 ? (
+          <ul className="job-list">
+            {jobList.map((job) => (
+              <li key={job.id} className="job-item">
+                <h3>{job.title}</h3>
+                <p>カテゴリ: {job.category}</p>
+                <p>年収: {job.income}万円</p>
+                <button onClick={() => navigate(`/detail/${job.id}`)}>詳細を見る</button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>該当する求人が見つかりませんでした。</p>
+        )}
       </div>
     </div>
   );
