@@ -1,12 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Job } from "../types";
-
-const jobList : Job[] = [
-  { id: 1, title: "フロントエンドエンジニア", category: "エンジニア", income:600},
-  { id: 2, title: "バックエンドエンジニア", category: "営業", income:350},
-  { id: 3, title: "プロジェクトマネージャー", category: "マーケティング", income:800},
-];
+import { jobList } from "../data/jobList"; // jobList.tsをインポート
 
 export const JobDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();

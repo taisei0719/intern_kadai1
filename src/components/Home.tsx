@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css"; // CSSファイルをリンク
-
-const jobList = [
-  { id: 1, title: "フロントエンドエンジニア", category: "エンジニア", income: "600" },
-  { id: 2, title: "バックエンドエンジニア", category: "営業", income: "350" },
-  { id: 3, title: "プロジェクトマネージャー", category: "マーケティング", income: "800" },
-];
+import { jobList } from "../data/jobList"; // jobList.tsをインポート
 
 export const Home: React.FC = () => {
   const [query, setQuery] = useState<string>("");
