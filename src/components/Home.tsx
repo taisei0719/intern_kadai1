@@ -38,7 +38,7 @@ export const Home: React.FC = () => {
         <p>該当件数: {filteredJobs.length}件</p>
         {filteredJobs.length > 0 ? (
           <ul className="job-list">
-            {jobList.map((job) => (
+            {filteredJobs.map((job) => (
               <li key={job.id} className="job-item">
                 <h3>{job.title}</h3>
                 <p>カテゴリ: {job.category}</p>
