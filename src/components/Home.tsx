@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import "./Home.css"; // CSSファイルをリンク
 
 const jobList = [
-  { id: 1, title: "フロントエンドエンジニア", location: "東京", description: "Reactを使用した開発" },
-  { id: 2, title: "バックエンドエンジニア", location: "大阪", description: "Node.jsを使用した開発" },
-  { id: 3, title: "プロジェクトマネージャー", location: "福岡", description: "プロジェクト全体の管理" },
+  { id: 1, title: "フロントエンドエンジニア", category: "エンジニア", income: "600" },
+  { id: 2, title: "バックエンドエンジニア", category: "営業", income: "350" },
+  { id: 3, title: "プロジェクトマネージャー", category: "マーケティング", income: "800" },
 ];
 
 export const Home: React.FC = () => {
@@ -37,8 +37,8 @@ export const Home: React.FC = () => {
           {jobList.map((job) => (
             <li key={job.id} className="job-item">
               <h3>{job.title}</h3>
-              <p>勤務地: {job.location}</p>
-              <p>{job.description}</p>
+              <p>カテゴリ: {job.category}</p>
+              <p>年収: {job.income}万円</p>
               <button onClick={() => navigate(`/detail/${job.id}`)}>詳細を見る</button>
             </li>
           ))}
