@@ -112,11 +112,14 @@ export const Home: React.FC = () => {
         {filteredJobs.length > 0 ? (
           <ul className="job-list">
             {filteredJobs.map((job) => (
-              <li key={job.id} className="job-item">
+              <li 
+              key={job.id} 
+              className="job-item" 
+              onClick={() => navigate(`/detail/${job.id}`)} // 求人全体をクリックで詳細ページへ遷移
+              >
                 <h3>{job.title}</h3>
                 <p>カテゴリ: {job.category}</p>
                 <p>年収: {job.income}万円</p>
-                <button onClick={() => navigate(`/detail/${job.id}`)}>詳細を見る</button>
               </li>
             ))}
           </ul>
