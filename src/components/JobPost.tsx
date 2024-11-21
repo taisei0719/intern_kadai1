@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // useNavigateをインポート
 import "./Post.css"; // CSSファイルをリンク
 
 interface JobPostProps {
@@ -7,26 +8,35 @@ interface JobPostProps {
 
 export const JobPost: React.FC<JobPostProps> = ({ addJob }) => {
   const [selectCategory, setSelectCategory] = useState<string>(""); // カテゴリの選択肢
-  const [income, setIncome] = useState<number | string>(""); // 年収入力
+  const [income, setIncome] = useState<number>(0); // 年収
   const [title, setTitle] = useState<string>(""); // 求人タイトル
+  const navigate = useNavigate(); // useNavigateフック
 
+  // フォーム送信時
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (title && selectCategory && income) {
-      addJob({ title, category: selectCategory, income: Number(income) });
-      setTitle("");
-      setSelectCategory("");
-      setIncome(""); // フォームをリセット
+
+    // バリデーション: カテゴリ、年収、タイトルが必須
+    if (!selectCategory || !title || !income) {
+      alert("すべての項目を入力してください。");
+      return;
     }
+
+    addJob({ title, category: selectCategory, income });
+    navigate("/"); // 求人投稿後にホームにリダイレクト
   };
 
   return (
     <div className="post-container">
       <h2>求人投稿</h2>
       <form onSubmit={handleSubmit}>
+        {/* 求人カテゴリ選択 */}
         <div className="category-select">
-          <h2>求人カテゴリ選択</h2>
-          <select value={selectCategory} onChange={(e) => setSelectCategory(e.target.value)}>
+          <h3>求人カテゴリ選択</h3>
+          <select
+            value={selectCategory}
+            onChange={(e) => setSelectCategory(e.target.value)}
+          >
             <option value="">カテゴリを選択</option>
             <option value="エンジニア">エンジニア</option>
             <option value="営業">営業</option>
@@ -42,18 +52,20 @@ export const JobPost: React.FC<JobPostProps> = ({ addJob }) => {
           </select>
         </div>
 
+        {/* 年収入力 */}
         <div className="income">
-          <h2>年収(万円)</h2>
+          <h3>年収(万円)</h3>
           <input
             type="number"
             value={income}
-            onChange={(e) => setIncome(e.target.value)}
+            onChange={(e) => setIncome(Number(e.target.value))} // 数値に変換
             placeholder="例: 500"
           />
         </div>
 
+        {/* 求人タイトル入力 */}
         <div className="title">
-          <h2>求人タイトル</h2>
+          <h3>求人タイトル</h3>
           <input
             type="text"
             value={title}
