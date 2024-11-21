@@ -1,10 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { jobList } from "../data/jobList"; // jobList.tsをインポート
+import { jobList } from "../data/jobList"; // jobListをインポート
 
 export const JobDetail: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const job = jobList.find((job) => job.id === parseInt(id || ""));
+  const { id } = useParams<{ id: string }>();  // idは文字列として受け取る
+  const job = jobList.find((job) => job.id === Number(id));  // idを数値に変換して比較
 
   if (!job) {
     return <p>求人情報が見つかりません。</p>;
@@ -18,3 +18,4 @@ export const JobDetail: React.FC = () => {
     </div>
   );
 };
+

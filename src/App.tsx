@@ -5,7 +5,6 @@ import { JobDetail } from "./components/JobDetail";
 import { JobPost } from "./components/JobPost";
 import { useState } from "react";
 import { jobList as initialJobList } from "./data/jobList";
-import { Job } from "./types";  // Job型をインポート
 
 const App: React.FC = () => {
 
