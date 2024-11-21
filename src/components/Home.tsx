@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import { JobPost } from "./JobPost"; // JobPostをインポート
 import { useNavigate } from "react-router-dom";
 import "./Home.css"; // CSSファイルをリンク
-import { jobList as initialJobList } from "../data/jobList"; // jobList.tsをインポート
+import { Job } from "../types";  // Job型をインポート
 
-export const Home: React.FC = () => {
-  const [jobList, setJobList] = useState(initialJobList); // 求人の状態を管理
+// Homeコンポーネントのpropsの型を定義
+interface HomeProps {
+  jobList: Job[]; // jobList を props として受け取る型
+}
+
+export const Home: React.FC<HomeProps> = ({ jobList }) => {
   const [query, setQuery] = useState<string>(""); // 検索クエリ
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]); // 選択された職種
   const [selectedIncome, setSelectedIncome] = useState<string>(""); // 年収フィルターの選択肢
@@ -16,9 +20,8 @@ export const Home: React.FC = () => {
 
   // 新しい求人をjobListに追加
   const addJob = (newJob: { title: string; category: string; income: number }) => {
-    setJobList((prevJobList) => {
+    setFilteredJobs((prevJobList) => {
       const updatedJobList = [...prevJobList, { id: prevJobList.length + 1, ...newJob }];
-      setFilteredJobs(updatedJobList); // 新しい求人をフィルタリングされたリストにも追加
       return updatedJobList;
     });
   };
