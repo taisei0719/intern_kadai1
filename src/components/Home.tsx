@@ -6,6 +6,7 @@ import { jobList } from "../data/jobList"; // jobList.tsをインポート
 export const Home: React.FC = () => {
   const [query, setQuery] = useState<string>(""); // 検索クエリ
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]); // 選択された職種
+  const [selectedIncome, setSelectedIncome] = useState<number | null>(null); // 選択された年収
   const [filteredJobs, setFilteredJobs] = useState(jobList); // フィルタリングされた求人一覧
   const navigate = useNavigate();
 
@@ -20,6 +21,11 @@ export const Home: React.FC = () => {
     });
   };
 
+  // 年収の絞り込み変更ハンドラー
+  const handleIncomeChange = (income: number) => {
+    setSelectedIncome(income);
+  };
+
   // 検索機能
   const handleSearch = () => {
     const lowerCaseQuery = query.toLowerCase();
@@ -27,7 +33,10 @@ export const Home: React.FC = () => {
       const matchesQuery = job.title.toLowerCase().includes(lowerCaseQuery);
       const matchesCategory =
         selectedCategories.length === 0 || selectedCategories.includes(job.category);
-      return matchesQuery && matchesCategory;
+      const matchesIncome =
+        selectedIncome === null || job.income >= selectedIncome;
+
+      return matchesQuery && matchesCategory && matchesIncome;
     });
     setFilteredJobs(results);
   };
@@ -35,7 +44,7 @@ export const Home: React.FC = () => {
   // フィルタリング処理
   useEffect(() => {
     handleSearch(); // クエリや職種が変更されるたびに検索を実行
-  }, [query, selectedCategories]);
+  }, [query, selectedCategories, selectedIncome]);
 
   return (
     <div className="home-container">
@@ -75,6 +84,23 @@ export const Home: React.FC = () => {
                 onChange={() => handleCategoryChange(category)}
               />
               {category}
+            </label>
+          ))}
+        </div>
+
+        <h2>年収</h2>
+        {/* 年収による絞り込み（50万円ごとに選択肢を追加） */}
+        <div className="income-filter">
+          {[200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500].map((income) => (
+            <label key={income} className="checkbox-label">
+              <input
+                type="radio"
+                name="income"
+                value={income}
+                checked={selectedIncome === income}
+                onChange={() => handleIncomeChange(income)}
+              />
+              {income}万円以上
             </label>
           ))}
         </div>
