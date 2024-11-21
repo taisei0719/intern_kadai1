@@ -18,7 +18,7 @@ header {
 
 /* ヘッダー内のタイトル部分 */
 header h1 {
-  margin: 0 5px; /* タイトル周りの余白を削除 */
+  margin: 0 20px; /* タイトル周りの余白を削除 */
   font-size: 23px;
   font-weight: bold;
 }
