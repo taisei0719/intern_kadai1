@@ -8,7 +8,7 @@ interface JobPostProps {
 
 export const JobPost: React.FC<JobPostProps> = ({ addJob }) => {
   const [selectCategory, setSelectCategory] = useState<string>(""); // カテゴリの選択肢
-  const [income, setIncome] = useState<number>(0); // 年収
+  const [income, setIncome] = useState<string>(""); // 年収（文字列として扱う）
   const [title, setTitle] = useState<string>(""); // 求人タイトル
   const navigate = useNavigate(); // useNavigateフック
 
@@ -22,7 +22,7 @@ export const JobPost: React.FC<JobPostProps> = ({ addJob }) => {
       return;
     }
 
-    addJob({ title, category: selectCategory, income });
+    addJob({ title, category: selectCategory, income: Number(income) }); // 年収を数値に変換
     navigate("/"); // 求人投稿後にホームにリダイレクト
   };
 
@@ -58,7 +58,7 @@ export const JobPost: React.FC<JobPostProps> = ({ addJob }) => {
           <input
             type="number"
             value={income}
-            onChange={(e) => setIncome(Number(e.target.value))} // 数値に変換
+            onChange={(e) => setIncome(e.target.value)} // 文字列として扱う
             placeholder="例: 500"
           />
         </div>
@@ -79,4 +79,5 @@ export const JobPost: React.FC<JobPostProps> = ({ addJob }) => {
     </div>
   );
 };
+
 
