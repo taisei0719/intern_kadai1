@@ -7,10 +7,13 @@
 header {
   background-color: #000080;
   color: white;
-  padding: 1rem;
+  padding: 0; /* パディングを0にして余白をなくす */
+  margin: 0; /* 余白をなくす */
   display: flex;
   justify-content: space-between; /* 両端に要素を配置 */
   align-items: center; /* 垂直方向に中央寄せ */
+  width: 100%; /* 横幅を100%に設定 */
+  box-sizing: border-box; /* パディングやボーダーを含めた幅の計算 */
 }
 
 /* ヘッダー内のタイトル部分 */
