@@ -8,6 +8,7 @@ export const Home: React.FC = () => {
   const [filteredJobs, setFilteredJobs] = useState(jobList);
   const navigate = useNavigate();
 
+  //検索機能
   const handleSearch = () => {
     const lowerCaseQuery = query.toLowerCase();
     const results = jobList.filter(
@@ -17,6 +18,14 @@ export const Home: React.FC = () => {
     );
     setFilteredJobs(results);
   };
+
+  // 職種で絞り込みを行う関数
+  const filterByCategory = (category: string) => {
+    const results = jobList.filter((job) => job.category === category);
+    setFilteredJobs(results);
+  };
+
+
 
   return (
     <div className="home-container">
@@ -30,6 +39,21 @@ export const Home: React.FC = () => {
           onChange={(e) => setQuery(e.target.value)}
         />
         <button onClick={handleSearch}>検索</button>
+
+        {/* 職種による絞り込みボタン */}
+        <div className="filter-buttons">
+          <button onClick={() => filterByCategory("エンジニア")}>エンジニア</button>
+          <button onClick={() => filterByCategory("営業")}>営業</button>
+          <button onClick={() => filterByCategory("マーケティング")}>マーケティング</button>
+          <button onClick={() => filterByCategory("管理職")}>管理職</button>
+          <button onClick={() => filterByCategory("デザイン")}>デザイン</button>
+          <button onClick={() => filterByCategory("金融")}>金融</button>
+          <button onClick={() => filterByCategory("ビジネス")}>ライティング</button>
+          <button onClick={() => filterByCategory("人事")}>人事</button>
+          <button onClick={() => filterByCategory("法務")}>法務</button>
+          <button onClick={() => filterByCategory("サポート")}>サポート</button>
+          <button onClick={() => setFilteredJobs(jobList)}>すべて表示</button>
+        </div>
       </div>
 
       {/* 求人一覧 */}
