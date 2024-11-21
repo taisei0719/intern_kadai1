@@ -15,8 +15,9 @@
   }
   
   /* 検索セクションのスタイル */
-  .search-section h2 {
+  .search-section h2 {/*求人検索*/
     margin-bottom: 10px;
+    font-weight: bold;
   }
   
   .search-section input {
@@ -39,6 +40,11 @@
   
   .search-section button:hover {
     background-color: #0056b3;
+  }
+
+  .search-section h2 {/*求人カテゴリ*/
+    margin-bottom: 10px;
+    font-weight: bold;
   }
 
   /* チェックボックスのラベルを縦に並べる */

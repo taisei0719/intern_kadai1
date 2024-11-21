@@ -44,6 +44,8 @@ export const Home: React.FC = () => {
           onChange={(e) => setQuery(e.target.value)}
         />
 
+        
+        <h2>求人カテゴリ</h2>
         {/* 職種による絞り込み（チェックボックス） */}
         <div className="filter-checkboxes">
           {[
