@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { jobList } from "../data/jobList"; // jobListをインポート
+import "./Detail.css"; // CSSファイルをリンク
 
 export const JobDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();  // idは文字列として受け取る
@@ -11,7 +12,7 @@ export const JobDetail: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className="detail-container">
       <h2>{job.title}</h2>
       <p>カテゴリ: {job.category}</p>
       <p>年収: {job.income}万円</p>
