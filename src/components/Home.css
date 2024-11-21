@@ -41,23 +41,19 @@
     background-color: #0056b3;
   }
 
-  .filter-buttons {
+  .filter-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
     margin-top: 10px;
   }
   
-  .filter-buttons button {
-    margin-right: 10px;
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
   
-  .filter-buttons button:hover {
-    background-color: #0056b3;
-  }
   
   
   /* 求人一覧セクション（右側） */

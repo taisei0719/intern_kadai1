@@ -1,31 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css"; // CSSファイルをリンク
 import { jobList } from "../data/jobList"; // jobList.tsをインポート
 
 export const Home: React.FC = () => {
-  const [query, setQuery] = useState<string>("");
-  const [filteredJobs, setFilteredJobs] = useState(jobList);
+  const [query, setQuery] = useState<string>(""); // 検索クエリ
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]); // 選択された職種
+  const [filteredJobs, setFilteredJobs] = useState(jobList); // フィルタリングされた求人一覧
   const navigate = useNavigate();
 
-  //検索機能
-  const handleSearch = () => {
+  // 職種のチェックボックスの変更ハンドラー
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategories((prevSelected) => {
+      if (prevSelected.includes(category)) {
+        return prevSelected.filter((item) => item !== category); // チェック解除
+      } else {
+        return [...prevSelected, category]; // チェック追加
+      }
+    });
+  };
+
+  // フィルタリング処理
+  useEffect(() => {
     const lowerCaseQuery = query.toLowerCase();
-    const results = jobList.filter(
-      (job) =>
-        job.title.toLowerCase().includes(lowerCaseQuery) ||
-        job.category.toLowerCase().includes(lowerCaseQuery)
-    );
+    const results = jobList.filter((job) => {
+      const matchesQuery = job.title.toLowerCase().includes(lowerCaseQuery);
+      const matchesCategory =
+        selectedCategories.length === 0 || selectedCategories.includes(job.category);
+      return matchesQuery && matchesCategory;
+    });
     setFilteredJobs(results);
-  };
-
-  // 職種で絞り込みを行う関数
-  const filterByCategory = (category: string) => {
-    const results = jobList.filter((job) => job.category === category);
-    setFilteredJobs(results);
-  };
-
-
+  }, [query, selectedCategories]);
 
   return (
     <div className="home-container">
@@ -38,21 +43,31 @@ export const Home: React.FC = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button onClick={handleSearch}>検索</button>
 
-        {/* 職種による絞り込みボタン */}
-        <div className="filter-buttons">
-          <button onClick={() => filterByCategory("エンジニア")}>エンジニア</button>
-          <button onClick={() => filterByCategory("営業")}>営業</button>
-          <button onClick={() => filterByCategory("マーケティング")}>マーケティング</button>
-          <button onClick={() => filterByCategory("管理職")}>管理職</button>
-          <button onClick={() => filterByCategory("デザイン")}>デザイン</button>
-          <button onClick={() => filterByCategory("金融")}>金融</button>
-          <button onClick={() => filterByCategory("ビジネス")}>ライティング</button>
-          <button onClick={() => filterByCategory("人事")}>人事</button>
-          <button onClick={() => filterByCategory("法務")}>法務</button>
-          <button onClick={() => filterByCategory("サポート")}>サポート</button>
-          <button onClick={() => setFilteredJobs(jobList)}>すべて表示</button>
+        {/* 職種による絞り込み（チェックボックス） */}
+        <div className="filter-checkboxes">
+          {[
+            "エンジニア",
+            "営業",
+            "マーケティング",
+            "管理職",
+            "デザイン",
+            "金融",
+            "ライティング",
+            "人事",
+            "法務",
+            "サポート",
+          ].map((category) => (
+            <label key={category} className="checkbox-label">
+              <input
+                type="checkbox"
+                value={category}
+                checked={selectedCategories.includes(category)}
+                onChange={() => handleCategoryChange(category)}
+              />
+              {category}
+            </label>
+          ))}
         </div>
       </div>
 
