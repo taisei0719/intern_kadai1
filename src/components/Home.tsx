@@ -143,7 +143,7 @@ export const Home: React.FC<HomeProps> = ({ jobList }) => {
               <li
                 key={job.id}
                 className="job-item"
-                onClick={() => navigate('/detail/${job.id}')} // 求人全体をクリックで詳細ページへ遷移
+                onClick={() => navigate(`/detail/${job.id}`)} // 求人全体をクリックで詳細ページへ遷移
               >
                 <h3>{job.title}</h3>
                 <p>カテゴリ: {job.category}</p>
