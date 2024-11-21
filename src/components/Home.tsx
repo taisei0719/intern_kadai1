@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { JobPost } from "./JobPost"; // JobPostをインポート
 import { useNavigate } from "react-router-dom";
 import "./Home.css"; // CSSファイルをリンク
-import { jobList as initialJobList} from "../data/jobList"; // jobList.tsをインポート
+import { jobList as initialJobList } from "../data/jobList"; // jobList.tsをインポート
 
 export const Home: React.FC = () => {
   const [jobList, setJobList] = useState(initialJobList); // 求人の状態を管理
@@ -15,8 +15,12 @@ export const Home: React.FC = () => {
   const navigate = useNavigate();
 
   // 新しい求人をjobListに追加
-  const addJob = (newJob: { title: string, category: string, income: number }) => {
-    setJobList([...jobList, { id: jobList.length + 1, ...newJob }]); // 新しい求人を追加
+  const addJob = (newJob: { title: string; category: string; income: number }) => {
+    setJobList((prevJobList) => {
+      const updatedJobList = [...prevJobList, { id: prevJobList.length + 1, ...newJob }];
+      setFilteredJobs(updatedJobList); // 新しい求人をフィルタリングされたリストにも追加
+      return updatedJobList;
+    });
   };
 
   useEffect(() => {
@@ -28,16 +32,14 @@ export const Home: React.FC = () => {
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
   const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
 
-
   // 最大ページ数を計算
   const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
-  
+
   // ページ変更時の処理
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo(0, 0); // ページ変更後に最上部にスクロール
   };
-
 
   // 職種のチェックボックスの変更ハンドラー
   const handleCategoryChange = (category: string) => {
@@ -57,7 +59,7 @@ export const Home: React.FC = () => {
       const matchesQuery = job.title.toLowerCase().includes(lowerCaseQuery);
       const matchesCategory =
         selectedCategories.length === 0 || selectedCategories.includes(job.category);
-    
+
       // 年収フィルタリング
       const matchesIncome = selectedIncome ? job.income >= parseInt(selectedIncome) : true;
 
@@ -132,7 +134,6 @@ export const Home: React.FC = () => {
             <option value="1000">1000万円以上</option>
           </select>
         </div>
-
       </div>
 
       {/* 求人一覧 */}
@@ -142,10 +143,10 @@ export const Home: React.FC = () => {
         {currentJobs.length > 0 ? (
           <ul className="job-list">
             {currentJobs.map((job) => (
-              <li 
-              key={job.id} 
-              className="job-item" 
-              onClick={() => navigate(`/detail/${job.id}`)} // 求人全体をクリックで詳細ページへ遷移
+              <li
+                key={job.id}
+                className="job-item"
+                onClick={() => navigate(`/detail/${job.id}`)} // 求人全体をクリックで詳細ページへ遷移
               >
                 <h3>{job.title}</h3>
                 <p>カテゴリ: {job.category}</p>
@@ -161,17 +162,16 @@ export const Home: React.FC = () => {
         <div className="pagination">
           {Array.from({ length: totalPages }, (_, index) => (
             <button
-            key={index + 1}
-            onClick={() => handlePageChange(index + 1)}
-            disabled={currentPage === index + 1}
+              key={index + 1}
+              onClick={() => handlePageChange(index + 1)}
+              disabled={currentPage === index + 1}
             >
               {index + 1}
             </button>
           ))}
         </div>
-
-
       </div>
     </div>
   );
 };
+
