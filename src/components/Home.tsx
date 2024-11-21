@@ -30,10 +30,6 @@ export const Home: React.FC<HomeProps> = ({ jobList }) => {
     window.scrollTo(0, 0); // ページ変更後に最上部にスクロール
   };
 
-  // 求人投稿ページに遷移
-  const navigateToPost = () => {
-    navigate("/post");
-  };
 
   return (
     <div className="home-container">
