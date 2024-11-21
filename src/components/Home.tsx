@@ -8,7 +8,24 @@ export const Home: React.FC = () => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]); // 選択された職種
   const [selectedIncome, setSelectedIncome] = useState<string>(""); // 年収フィルターの選択肢
   const [filteredJobs, setFilteredJobs] = useState(jobList); // フィルタリングされた求人一覧
+  const [currentPage, setCurrentPage] = useState<number>(1); // 現在のページ
+  const jobsPerPage = 10; // 1ページあたりの求人数
   const navigate = useNavigate();
+
+  // ページごとに表示する求人を計算
+  const indexOfLastJob = currentPage * jobsPerPage;
+  const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+  const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
+
+
+  // 最大ページ数を計算
+  const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
+  
+  // ページ変更時の処理
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
 
   // 職種のチェックボックスの変更ハンドラー
   const handleCategoryChange = (category: string) => {
@@ -126,6 +143,21 @@ export const Home: React.FC = () => {
         ) : (
           <p>該当する求人が見つかりませんでした。</p>
         )}
+
+        {/* ページネーション */}
+        <div className="pagination">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+            key={index + 1}
+            onClick={() => handlePageChange(index + 1)}
+            disabled={currentPage === index + 1}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+
+
       </div>
     </div>
   );
