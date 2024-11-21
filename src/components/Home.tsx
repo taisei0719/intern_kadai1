@@ -24,6 +24,7 @@ export const Home: React.FC = () => {
   // ページ変更時の処理
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+    window.scrollTo(0, 0); // ページ変更後に最上部にスクロール
   };
 
 
