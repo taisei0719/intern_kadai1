@@ -20,8 +20,8 @@ export const Home: React.FC = () => {
     });
   };
 
-  // フィルタリング処理
-  useEffect(() => {
+  // 検索機能
+  const handleSearch = () => {
     const lowerCaseQuery = query.toLowerCase();
     const results = jobList.filter((job) => {
       const matchesQuery = job.title.toLowerCase().includes(lowerCaseQuery);
@@ -30,6 +30,11 @@ export const Home: React.FC = () => {
       return matchesQuery && matchesCategory;
     });
     setFilteredJobs(results);
+  };
+
+  // フィルタリング処理
+  useEffect(() => {
+    handleSearch(); // クエリや職種が変更されるたびに検索を実行
   }, [query, selectedCategories]);
 
   return (
@@ -43,8 +48,9 @@ export const Home: React.FC = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
+        {/* 検索ボタン */}
+        <button onClick={handleSearch}>検索</button>
 
-        
         <h2>求人カテゴリ</h2>
         {/* 職種による絞り込み（チェックボックス） */}
         <div className="filter-checkboxes">
