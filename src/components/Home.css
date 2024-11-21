@@ -8,7 +8,7 @@
   .search-section {
     width: 25%; /* 全体の25%を占める */
     margin-right: 20px;
-    background-color: #f8f9fa; /* 薄い背景色 */
+    background-color: #144270; /* 背景色 */
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -36,6 +36,7 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    box-sizing: border-box; /* 幅の計算を含むように設定 */
   }
   
   .search-section button:hover {
