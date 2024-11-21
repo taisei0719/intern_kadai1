@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { JobPost } from "./JobPost"; // JobPostをインポート
 import { useNavigate } from "react-router-dom";
 import "./Home.css"; // CSSファイルをリンク
-import { jobList } from "../data/jobList"; // jobList.tsをインポート
+import { jobList as initialJobList} from "../data/jobList"; // jobList.tsをインポート
 
 export const Home: React.FC = () => {
+  const [jobList, setJobList] = useState(initialJobList); // 求人の状態を管理
   const [query, setQuery] = useState<string>(""); // 検索クエリ
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]); // 選択された職種
   const [selectedIncome, setSelectedIncome] = useState<string>(""); // 年収フィルターの選択肢
@@ -11,6 +13,15 @@ export const Home: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1); // 現在のページ
   const jobsPerPage = 10; // 1ページあたりの求人数
   const navigate = useNavigate();
+
+  // 新しい求人をjobListに追加
+  const addJob = (newJob: { title: string, category: string, income: number }) => {
+    setJobList([...jobList, { id: jobList.length + 1, ...newJob }]); // 新しい求人を追加
+  };
+
+  useEffect(() => {
+    setFilteredJobs(jobList); // jobListが更新されたらfilteredJobsも更新
+  }, [jobList]);
 
   // ページごとに表示する求人を計算
   const indexOfLastJob = currentPage * jobsPerPage;
@@ -62,6 +73,7 @@ export const Home: React.FC = () => {
 
   return (
     <div className="home-container">
+      <JobPost addJob={addJob} /> {/* 求人投稿フォーム */}
       {/* 検索セクション */}
       <div className="search-section">
         <h2>求人検索</h2>
