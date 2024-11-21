@@ -41,17 +41,17 @@
     background-color: #0056b3;
   }
 
+  /* チェックボックスのラベルを縦に並べる */
   .filter-checkboxes {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
+    flex-direction: column; /* 縦に並べる */
+    gap: 10px; /* チェックボックス間のスペース */
   }
   
+  /* チェックボックスのラベルのスタイル */
   .checkbox-label {
     display: flex;
-    align-items: center;
-    gap: 5px;
+    align-items: center; /* チェックボックスとラベルを縦に中央揃え */
   }
   
   
