@@ -54,7 +54,9 @@
   .checkbox-label {
     display: flex;
     align-items: center; /* チェックボックスとラベルを縦に中央揃え */
-  }
+    white-space: nowrap; /* 改行を防ぐ */
+}
+
   
   
   
