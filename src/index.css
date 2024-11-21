@@ -40,17 +40,23 @@ header nav a:hover {
 
 /* ページコンテンツのマージン */
 .App {
-  padding: 20px;
+  margin: 0; /* 余白をなくす */
+  padding: 0; /* パディングを0に設定 */
+  width: 100%; /* 横幅を100%に設定 */
+  box-sizing: border-box; /* パディングやボーダーを含めた幅の計算 */
 }
 
 
 body {
-  margin: 0;
+  margin: 0; /* 余白を削除 */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%; /* ボディの高さを100%に設定 */
+  width: 100%; /* ボディの横幅を100%に設定 */
+  box-sizing: border-box; /* パディングやボーダーを含めた幅の計算 */
 }
 
 code {
