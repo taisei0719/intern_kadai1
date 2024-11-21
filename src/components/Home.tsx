@@ -6,7 +6,7 @@ import { jobList } from "../data/jobList"; // jobList.tsをインポート
 export const Home: React.FC = () => {
   const [query, setQuery] = useState<string>(""); // 検索クエリ
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]); // 選択された職種
-  const [selectedIncome, setSelectedIncome] = useState<number | null>(null); // 選択された年収
+  const [selectedIncome, setSelectedIncome] = useState<string>(""); // 年収フィルターの選択肢
   const [filteredJobs, setFilteredJobs] = useState(jobList); // フィルタリングされた求人一覧
   const navigate = useNavigate();
 
@@ -21,11 +21,6 @@ export const Home: React.FC = () => {
     });
   };
 
-  // 年収の絞り込み変更ハンドラー
-  const handleIncomeChange = (income: number) => {
-    setSelectedIncome(income);
-  };
-
   // 検索機能
   const handleSearch = () => {
     const lowerCaseQuery = query.toLowerCase();
@@ -33,8 +28,9 @@ export const Home: React.FC = () => {
       const matchesQuery = job.title.toLowerCase().includes(lowerCaseQuery);
       const matchesCategory =
         selectedCategories.length === 0 || selectedCategories.includes(job.category);
-      const matchesIncome =
-        selectedIncome === null || job.income >= selectedIncome;
+    
+      // 年収フィルタリング
+      const matchesIncome = selectedIncome ? job.income >= parseInt(selectedIncome) : true;
 
       return matchesQuery && matchesCategory && matchesIncome;
     });
@@ -91,19 +87,22 @@ export const Home: React.FC = () => {
         <h2>年収</h2>
         {/* 年収による絞り込み（50万円ごとに選択肢を追加） */}
         <div className="income-filter">
-          {[200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500].map((income) => (
-            <label key={income} className="checkbox-label">
-              <input
-                type="radio"
-                name="income"
-                value={income}
-                checked={selectedIncome === income}
-                onChange={() => handleIncomeChange(income)}
-              />
-              {income}万円以上
-            </label>
-          ))}
+          <select value={selectedIncome} onChange={(e) => setSelectedIncome(e.target.value)}>
+            <option value="">選択してください</option>
+            <option value="500">500万円以上</option>
+            <option value="550">550万円以上</option>
+            <option value="600">600万円以上</option>
+            <option value="650">650万円以上</option>
+            <option value="700">700万円以上</option>
+            <option value="750">750万円以上</option>
+            <option value="800">800万円以上</option>
+            <option value="850">850万円以上</option>
+            <option value="900">900万円以上</option>
+            <option value="950">950万円以上</option>
+            <option value="1000">1000万円以上</option>
+          </select>
         </div>
+
       </div>
 
       {/* 求人一覧 */}

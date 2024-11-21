@@ -47,7 +47,6 @@
     font-weight: bold;
   }
 
-  /* チェックボックスのラベルを縦に並べる */
   .filter-checkboxes {
     display: flex;
     flex-direction: column; /* 縦に並べる */
@@ -68,23 +67,17 @@
     font-weight: bold;
   }
 
-  /* 年収フィルターセクションを中央に配置 */
+  /* 年収フィルターセクションを左寄せに配置 */
   .income-filter {
     margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* 左寄せにする */
-    padding-left: 20px; /* 左の余白を追加 */
   }
   
-  /* ラジオボタンとテキストを横並びに */
-  .income-filter label {
-    display: flex;
-    align-items: center;
-  }
-  
-  .income-filter input[type="radio"] {
-    margin-right: 8px;
+  .income-filter select {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 100%;
   }
 
 
